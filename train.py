@@ -19,7 +19,7 @@ from models.MSGNN import (
     Net
 )
 from models.utils import (
-    Logger
+    Logger, makedirs
 )
 
 
@@ -87,6 +87,9 @@ class Tester(object):
 
 FOLD = 10
 args = make_args()
+
+makedirs("results/every_fold_model")
+makedirs("results/best_model")
 
 Accuracy_Avg, Precision_Avg, Recall_Avg, F1_Avg = [], [], [], []
 for fold in range(FOLD):
