@@ -104,3 +104,10 @@ class NormLayer(nn.Module):
         std = ((std.T / batch_list).T + 1e-6).sqrt()
         std = std.repeat_interleave(batch_list, dim=0)
         return self.weight * sub / std + self.bias
+
+
+def makedirs(path: str, isfile: bool = False):
+    if isfile:
+        path = os.path.dirname(path)
+    if path != '':
+        os.makedirs(path, exist_ok=True)
