@@ -22,6 +22,10 @@ from torch_geometric.loader import DataLoader
 
 from graphCLR.models.ginet_molclr import GINet
 
+from models.utils import (
+    makedirs
+)
+
 # Check if GPU is available
 cuda_name = "cuda:2"
 device = torch.device(cuda_name if torch.cuda.is_available() else "cpu")
@@ -403,6 +407,8 @@ class MolGraph():
 def create_cross_data(ori_train, ori_test, fold, aug_num=0):
     """Create data for each fold in cross validation"""
     file_name = './cross_data/fold-'+str(fold)+'/'
+    makedirs(file_name)
+    
     train_dataset, test_dataset = [], []
 
     print(f'Fold-{fold}')
