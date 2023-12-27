@@ -6,6 +6,8 @@ import torch.nn as nn
 import torch.optim as optim
 from dgl.dataloading import GraphDataLoader
 
+import os
+import sys
 import shutil
 
 from config import *
@@ -91,6 +93,10 @@ args = make_args()
 makedirs("results/every_fold_model")
 makedirs("results/best_model")
 
+if not os.path.exists("dataset/cross_data"):
+    print("Please run the 'data_preprocessing.py' file first.")
+    sys.exit(0)
+    
 Accuracy_Avg, Precision_Avg, Recall_Avg, F1_Avg = [], [], [], []
 for fold in range(FOLD):
     fingerprint_dict, dataset_train, dataset_test = get_data(fold+1)
